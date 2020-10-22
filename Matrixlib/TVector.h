@@ -3,6 +3,11 @@
 
 #include <iostream>
 
+using namespace std;
+
+const int MAX_VECTOR_SIZE = 100000000;
+const int MAX_MATRIX_SIZE = 10000;
+
 template <class ValType>
 class TVector
 {
