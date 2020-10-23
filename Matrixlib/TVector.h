@@ -2,7 +2,6 @@
 #define _TVECTOR_H_
 
 #include <iostream>
-
 using namespace std;
 
 const int MAX_VECTOR_SIZE = 100000000;
@@ -55,10 +54,12 @@ public:
 template <typename ValType>
 TVector<ValType>::TVector(int s, int si)
 {
-  Size = s;
+  if ((s < 0) || (s >= MAX_VECTOR_SIZE)) throw "negative or too large vector size";
+    if (si < 0) throw "negative or too large startindex";
+    Size = s;
     StartIndex = si;
-    pVector = new ValType[Size];
-    for (int i = StartIndex;i < Size; i++)
+    pVector = new ValType[s];
+    for (int i = 0; i < s; i++)
         pVector[i] = 0;
 }
 
