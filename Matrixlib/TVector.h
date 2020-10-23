@@ -76,7 +76,6 @@ TVector<ValType>::TVector(const TVector& v)
 template<typename ValType>
 TVector<ValType>::~TVector()
 {
-  if (pVector != nullptr)
     delete[] pVector;
 }
 
