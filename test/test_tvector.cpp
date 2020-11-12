@@ -7,6 +7,11 @@ TEST(TVector, can_create_vector_with_positive_length)
   ASSERT_NO_THROW(TVector<int> v(5));
 }
 
+TEST(TVector, cant_create_too_large_vector)
+{
+  ASSERT_ANY_THROW(TVector<int> v(MAX_VECTOR_SIZE + 1));
+}
+
 TEST(TVector, throws_when_create_vector_with_negative_length)
 {
   ASSERT_ANY_THROW(TVector<int> v(-5));
@@ -79,10 +84,6 @@ TEST(TVector, can_assign_vector_to_itself)
 TEST(TVector, can_assign_vectors_of_equal_size)
 {
 	TVector<int> v(5), v2(5);
-	//for (int i = 0; i < 5; i++)
-		//v[i] = 5;
-	//for (int i = 0; i < 5; i++)
-		//v2[i] = 10;
 	v = v2;
 	EXPECT_EQ(1, v == v2);
 }
@@ -186,13 +187,6 @@ TEST(TVector, cant_add_vectors_with_not_equal_size)
 TEST(TVector, can_subtract_vectors_with_equal_size)
 {
 	TVector<int> v(2), v2(2);
-	/*for (int i = 0; i < 2; i++)
-	{
-		v[i] = i + 1; v2[i] = i + 2;
-	}
-	TVector<int> res_ex(2);
-	for (int i = 0; i < 2; i++)
-		res_ex[i] = 1;*/
 	v[0] = 1; v[1] = 2;
 	v2[0] = 2; v2[1] = 3;
 	TVector<int> res_ex(2);
@@ -200,7 +194,6 @@ TEST(TVector, can_subtract_vectors_with_equal_size)
 	TVector<int> res(2);
 	res = v2 - v;
 	EXPECT_EQ(1, res_ex == res);
-	//ADD_FAILURE();
 }
 
 TEST(TVector, cant_subtract_vectors_with_not_equal_size)
@@ -219,7 +212,6 @@ TEST(TVector, can_multiply_vectors_with_equal_size)
 	int res_ex = v * v2;
 	int res = 12;
 	EXPECT_EQ(res, res_ex);
-	//ADD_FAILURE();
 }
 
 TEST(TVector, cant_multiply_vectors_with_not_equal_size)

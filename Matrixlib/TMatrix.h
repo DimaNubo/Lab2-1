@@ -17,7 +17,7 @@ public:
   bool operator!=(const TMatrix& mt) const;      // сравнение
   TMatrix& operator= (const TMatrix& mt);        // присваивание
   TMatrix  operator+ (const TMatrix& mt);        // сложение
-  TMatrix  operator- (const TMatrix& mt);        // вычитание
+  TMatrix  operator- (const TMatrix& mt);       // вычитание
 
   // ввод / вывод
   friend std::istream& operator >> (std::istream& in, TMatrix& mt)
@@ -37,11 +37,13 @@ public:
 template<typename ValType>
 TMatrix<ValType>::TMatrix(int s) : TVector<TVector<ValType> >(s)
 {
-  for(int i = 0; i < s; i++)
-        pVector[i] = TVector <ValType> (s,i);
-    for(int i = 0; i < s; i++)
-        for(int j = i; j < s; j++)
-            pVector[i][j] = 0;
+  if ((s > 0) && (s < MAX_MATRIX_SIZE)) {
+		for (int i = 0; i < s; i++) {
+			pVector[i] = TVector<ValType>(s - i, i);
+		}
+	}
+	else
+		throw  - 1;
 }
 
 template<typename ValType>
@@ -105,13 +107,13 @@ TMatrix<ValType>& TMatrix<ValType>::operator=(const TMatrix<ValType>& mt)
 }
 
 template<typename ValType>
-TMatrix<ValType> TMatrix<ValType>::operator+(const TMatrix& mt)
+TMatrix<ValType> TMatrix<ValType>::operator + (const TMatrix& mt)
 {
   return TVector<TVector<ValType> >::operator+(mt);
 }
 
 template<typename ValType>
-TMatrix<ValType> TMatrix<ValType>::operator-(const TMatrix& mt)
+TMatrix<ValType> TMatrix<ValType>::operator - (const TMatrix& mt)
 {
   return TVector<TVector<ValType> >::operator-(mt);
 }
